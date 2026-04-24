@@ -1,6 +1,8 @@
-
+# Menu inicial
 print("Bienvenido a la calculadora")
 
+
+# funcion para pedir los digitos
 def pedir_numero(mensaje):
     while True:
    
@@ -10,33 +12,60 @@ def pedir_numero(mensaje):
         except ValueError:
             print("Error, ¡Eso no es un numero! intente de nuevo")
 
+#funcion para las soperaciones
 def calcular(n1, n2, op):
 
     if op in ["x", "*"]:
         return n1 * n2
     
-    elif op in ["/"]:
+    elif op == "/":
         if n2 != 0:
             return n1 / n2
         else:
                 print ("No se puede dividir entre 0")
                 return None
         
-    elif op in ["-"]:
+    elif op == "-":
         return n1 - n2
     
-    elif op in ["+"]:
+    elif op == "+":
         return n1 + n2
     
     else:
-        print ("Operacion no valida")
+        print ("Operacion no valida, intenta con +, -, *, /")
         return None
 
 
-
+#loop que contiene la logica del programa
 while True:
-    
 
+    print("----------------------------")
+    print("\n1, Nueva operacion ")
+    print("2, Ver historial")
+    print("3, Salir")
+
+    opcion = input("Elije una opcion")
+
+    if opcion == "2":
+        try:
+             with open ("historial.txt", "r") as archivo:
+                 print("\n--- Historial ---")
+                 print(archivo.read())
+        except FileNotFoundError:
+            print("No hay historial aún")
+
+        continue
+
+    elif opcion == "3":
+        print("Hasta luego")
+        break
+    
+    elif opcion != "1":
+        print("Opción no válida")
+        continue
+   
+
+    # variables de los numeros utilizando la funcion de pedir_numero
     numero1 = pedir_numero("Introduzca un numero: ")
     numero2 = pedir_numero("Introduzca otro numero: ")
 
@@ -52,10 +81,20 @@ while True:
 
         if resultado is not None:
             print (f"Tu resultado es {resultado}")
+            
+            with open("historial.txt", "a") as archivo:
+                archivo.write(f"{numero1} {operacion} {numero2} = {resultado}\n")
+
             break
 
-    continuar = input("Quieres continuar? (s/n): ").lower()
 
+            with open ("historial.txt", "a") as archivo:
+                archivo.write(f"{numero1} {operacion} {numero2} = {resultado}\n")
+
+            break
+
+
+    continuar = input("Quieres continuar? (s/n): ").lower()
     if continuar == "n":
             break
 
