@@ -1,4 +1,4 @@
-# Menu inicial
+# mensaje inicial
 print("Bienvenido a la calculadora")
 
 
@@ -38,13 +38,14 @@ def calcular(n1, n2, op):
 
 #loop que contiene la logica del programa
 while True:
-
+    #menu
     print("----------------------------")
-    print("\n1, Nueva operacion ")
-    print("2, Ver historial")
-    print("3, Salir")
+    print("\n1. Nueva operacion ")
+    print("2. Ver historial")
+    print("3. Salir")
+    print("4. Borrar historial")
 
-    opcion = input("Elije una opcion")
+    opcion = input("Elije una opcion: ")
 
     if opcion == "2":
         try:
@@ -59,21 +60,30 @@ while True:
     elif opcion == "3":
         print("Hasta luego")
         break
-    
+
+    elif opcion == "4":
+        confirmacion = input("Seguro que quieres borrar el historial (s/n): ").lower()
+
+        if confirmacion == "s":
+            with open("historial.txt", "w") as archivo:
+                pass
+
+        else:
+            print("Historial borrado correctamente")
+        continue
+        
     elif opcion != "1":
         print("Opción no válida")
         continue
-   
 
+   
     # variables de los numeros utilizando la funcion de pedir_numero
     numero1 = pedir_numero("Introduzca un numero: ")
     numero2 = pedir_numero("Introduzca otro numero: ")
 
-            
+
     
     while True:
-
-
 
         operacion = input("Que operacion desea realizar? (x, /, -, +): ").lower()
 
