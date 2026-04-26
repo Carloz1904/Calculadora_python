@@ -50,10 +50,17 @@ while True:
     if opcion == "2":
         try:
              with open ("historial.txt", "r") as archivo:
-                 print("\n--- Historial ---")
-                 print(archivo.read())
+                contenido = archivo.read().strip()
+
+                if contenido:
+                    print("\n--- Historial ---")
+                    print(contenido)
+
+                else:
+                    print("\nNo hay historial aún")
+
         except FileNotFoundError:
-            print("No hay historial aún")
+            print("No hay historia aún")
 
         continue
 
