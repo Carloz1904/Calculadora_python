@@ -1,3 +1,5 @@
+from datetime import datetime
+
 # mensaje inicial
 print("Bienvenido a la calculadora")
 
@@ -96,20 +98,18 @@ while True:
 
         resultado = calcular(numero1, numero2, operacion)
 
+
         if resultado is not None:
             print (f"Tu resultado es {resultado}")
             
+
+            fecha = datetime.now()
+            fecha_formateada = fecha.strftime("%Y-%m-%d %H:%M:%S")
+
             with open("historial.txt", "a") as archivo:
-                archivo.write(f"{numero1} {operacion} {numero2} = {resultado}\n")
+                archivo.write(f"[{fecha_formateada}] {numero1} {operacion} {numero2} = {resultado}\n")
 
             break
-
-
-            with open ("historial.txt", "a") as archivo:
-                archivo.write(f"{numero1} {operacion} {numero2} = {resultado}\n")
-
-            break
-
 
     continuar = input("Quieres continuar? (s/n): ").lower()
     if continuar == "n":
