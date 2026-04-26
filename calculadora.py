@@ -62,7 +62,7 @@ while True:
                     print("\nNo hay historial aún")
 
         except FileNotFoundError:
-            print("No hay historia aún")
+            print("No hay historial aún")
 
         continue
 
@@ -76,9 +76,10 @@ while True:
         if confirmacion == "s":
             with open("historial.txt", "w") as archivo:
                 pass
+            print("\nHistorial borrado correctamente")
 
         else:
-            print("Historial borrado correctamente")
+            print("\nAccion cancelada")
         continue
         
     elif opcion != "1":
@@ -113,5 +114,6 @@ while True:
 
     continuar = input("Quieres continuar? (s/n): ").lower()
     if continuar == "n":
-            break
+        print("Hasta luego")
+        break
 
