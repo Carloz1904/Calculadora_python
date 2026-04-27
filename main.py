@@ -1,68 +1,61 @@
+import tkinter as tk
 from operaciones import calcular
 from historial import guardar_historial, ver_historial, borrar_historial
 
 
-print("Bienvenido a la calculadora")
-
-# funcion para pedir los digitos
-def pedir_numero(mensaje):
-    while True:
-   
-        try:
-            return float(input(mensaje))
-
-        except ValueError:
-            print("Error, ¡Eso no es un numero! intente de nuevo")
-
-while True:
-    #menu
-    print("----------------------------")
-    print("\n1. Nueva operacion ")
-    print("2. Ver historial")
-    print("3. Salir")
-    print("4. Borrar historial")
-
-    opcion = input("Elije una opcion: ")
-
-
-    if opcion == "2":
-        ver_historial()
-        continue
-
-    elif opcion == "3":
-        print("Hasta luego")
-        break
-
-    elif opcion == "4":
-        borrar_historial()
-        continue
-        
-    elif opcion != "1":
-        print("Opción no válida")
-        continue
-
-    # variables de los numeros utilizando la funcion de pedir_numero
-    numero1 = pedir_numero("Introduzca un numero: ")
-    numero2 = pedir_numero("Introduzca otro numero: ")
-
-
-
-    while True:
-
-        operacion = input("Que operacion desea realizar? (x, /, -, +): ").lower()
-
+#funcion principal
+def realizar_calculo():
+    try:
+        numero1 = float(entrada1.get())
+        numero2 = float(entrada2.get())
+        operacion = entrada_operacion.get().lower()
         resultado = calcular(numero1, numero2, operacion)
 
-
         if resultado is not None:
-            print (f"Tu resultado es {resultado}")
+            resultado_label.config(text=f"Resultado: {resultado}")
 
-        guardar_historial(numero1, numero2, operacion, resultado)
 
-        break
+            guardar_historial(numero1, numero2, operacion, resultado)
+            
+        else:
+            resultado_label.config(text=f"Error en la operacion")
 
-    continuar = input("Quieres continuar? (s/n): ").lower()
-    
-    if continuar == "n":
-        print("Hasta luego")
-        break
+    except ValueError:
+        resultado_label.config(text=f"Introduzca numeros validos")
+
+# Crear ventana
+ventana = tk.Tk()
+ventana.title("Calculadora de Carlos")
+ventana.geometry("400x400")
+
+
+# Titulo
+titulo = tk.Label(ventana, text="Calculadora", font=("Arial",18))
+titulo.pack(pady=10)
+
+
+# numero1
+tk.Label(ventana, text="Primer numero: ").pack()
+entrada1 = tk.Entry(ventana)
+entrada1.pack()
+
+# numero2
+tk.Label(ventana, text="Segundo numero: ").pack()
+entrada2 = tk.Entry(ventana)
+entrada2.pack()
+
+# operacion
+tk.Label(ventana, text="Operacion(+, -, *, /): ").pack()
+entrada_operacion = tk.Entry(ventana)
+entrada_operacion.pack()
+
+# Boton calcular
+boton_calcular = tk.Button(ventana, text="Calcular", command=realizar_calculo)
+boton_calcular.pack(pady=10)
+
+# Resultado
+resultado_label = tk.Label(ventana, text="Resultado")
+resultado_label.pack(pady=10)
+
+# Ejecutar
+ventana.mainloop() 
