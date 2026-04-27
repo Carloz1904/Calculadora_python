@@ -8,7 +8,7 @@ def realizar_calculo():
     try:
         numero1 = float(entrada1.get())
         numero2 = float(entrada2.get())
-        operacion = entrada_operacion.get().lower()
+        operacion = operacion_var.get()
         resultado = calcular(numero1, numero2, operacion)
 
         if resultado is not None:
@@ -22,6 +22,10 @@ def realizar_calculo():
 
     except ValueError:
         resultado_label.config(text=f"Introduzca numeros validos")
+
+def seleccionar_operacion(op):
+    operacion_var.set(op)
+    operacion_label.config(text=f"Operacion seleccionada: {op}")
 
 # Crear ventana
 ventana = tk.Tk()
@@ -45,9 +49,22 @@ entrada2 = tk.Entry(ventana)
 entrada2.pack()
 
 # operacion
-tk.Label(ventana, text="Operacion(+, -, *, /): ").pack()
-entrada_operacion = tk.Entry(ventana)
-entrada_operacion.pack()
+operacion_var = tk.StringVar()
+
+operacion_label = tk.Label(ventana, text="Operacion seleccionada: Ninguna")
+operacion_label.pack()
+
+# Botones operacion
+tk.Label(ventana, text="Selecciona una operacion:").pack()
+
+frame_botones = tk.Frame(ventana)
+frame_botones.pack()
+
+tk.Button(frame_botones, text="+", command=lambda: seleccionar_operacion("+")).pack(side="left")
+tk.Button(frame_botones, text="-", command=lambda: seleccionar_operacion("-")).pack(side="left")
+tk.Button(frame_botones, text="*", command=lambda: seleccionar_operacion("*")).pack(side="left")
+tk.Button(frame_botones, text="/", command=lambda: seleccionar_operacion("/")).pack(side="left")
+
 
 # Boton calcular
 boton_calcular = tk.Button(ventana, text="Calcular", command=realizar_calculo)
