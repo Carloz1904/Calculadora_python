@@ -27,6 +27,13 @@ def seleccionar_operacion(op):
     operacion_var.set(op)
     operacion_label.config(text=f"Operacion seleccionada: {op}")
 
+def limpiar_campos():
+    entrada1.delete(0, tk.END)
+    entrada2.delete(0, tk.END)
+    operacion_var.set("")
+    operacion_label.config(text="Operacion seleccionada: Ninguna")
+    resultado_label.config(text="Resultado")
+
 # Crear ventana
 ventana = tk.Tk()
 ventana.title("Calculadora de Carlos")
@@ -48,6 +55,9 @@ tk.Label(ventana, text="Segundo numero: ").pack()
 entrada2 = tk.Entry(ventana)
 entrada2.pack()
 
+# Limpiar
+tk.Button(ventana, text="Limpiar", command=limpiar_campos).pack()
+
 # operacion
 operacion_var = tk.StringVar()
 
@@ -60,10 +70,10 @@ tk.Label(ventana, text="Selecciona una operacion:").pack()
 frame_botones = tk.Frame(ventana)
 frame_botones.pack()
 
-tk.Button(frame_botones, text="+", command=lambda: seleccionar_operacion("+")).pack(side="left")
-tk.Button(frame_botones, text="-", command=lambda: seleccionar_operacion("-")).pack(side="left")
-tk.Button(frame_botones, text="*", command=lambda: seleccionar_operacion("*")).pack(side="left")
-tk.Button(frame_botones, text="/", command=lambda: seleccionar_operacion("/")).pack(side="left")
+tk.Button(frame_botones, text="+", width=5, command=lambda: seleccionar_operacion("+")).pack(side="left", padx=5)
+tk.Button(frame_botones, text="-", width=5, command=lambda: seleccionar_operacion("-")).pack(side="left", padx=5)
+tk.Button(frame_botones, text="*", width=5, command=lambda: seleccionar_operacion("*")).pack(side="left", padx=5)
+tk.Button(frame_botones, text="/", width=5, command=lambda: seleccionar_operacion("/")).pack(side="left", padx=5)
 
 
 # Boton calcular
