@@ -34,6 +34,22 @@ def limpiar_campos():
     operacion_label.config(text="Operacion seleccionada: Ninguna")
     resultado_label.config(text="Resultado")
 
+def mostrar_historial():
+
+    historial_ventana = tk.Toplevel(ventana)
+    historial_ventana.title("Historial de Carlos")
+    historial_ventana.geometry("400x400")
+
+    texto_historial = tk.Text(historial_ventana, wrap="word")
+    texto_historial.pack(expand=True, fill="both")
+
+    contenido = ver_historial()
+
+    print("Contenido", contenido)
+
+    texto_historial.insert(tk.END, contenido)
+    texto_historial.config(state="disabled")
+
 # Crear ventana
 ventana = tk.Tk()
 ventana.title("Calculadora de Carlos")
@@ -79,6 +95,11 @@ tk.Button(frame_botones, text="/", width=5, command=lambda: seleccionar_operacio
 # Boton calcular
 boton_calcular = tk.Button(ventana, text="Calcular", command=realizar_calculo)
 boton_calcular.pack(pady=10)
+
+#boton ver historial
+
+wacha_historial = tk.Button(ventana, text="Ver Historial", command=mostrar_historial)
+wacha_historial.pack(pady=10)
 
 # Resultado
 resultado_label = tk.Label(ventana, text="Resultado")

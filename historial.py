@@ -13,14 +13,12 @@ def ver_historial():
                 contenido = archivo.read().strip()
 
                 if contenido:
-                    print("\n--- Historial ---")
-                    print(contenido)
-
+                      return contenido
                 else:
-                    print("\nNo hay historial aún")
+                      return "No hay contenido"
 
         except FileNotFoundError:
-            print("No hay historial aún")
+            return"No hay historial aún"
 
 def borrar_historial():
     confirmacion = input("Seguro que quieres borrar el historial (s/n): ").lower()
